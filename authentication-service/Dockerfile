@@ -27,13 +27,13 @@
 
 
 
-FROM openjdk:17-alpine
+# FROM openjdk:17-alpine
 #
 #MAINTAINER Wisarut Saelao, Wisarut@gmail.com
 #
-EXPOSE 8081
+# EXPOSE 8081
 
-COPY ./target/authentication-service-0.0.1-SNAPSHOT.jar authentication-service.jar
+# COPY ./target/authentication-service-0.0.1-SNAPSHOT.jar authentication-service.jar
 #
-ENTRYPOINT ["java", "-jar", "/authentication-service.jar"]
+# ENTRYPOINT ["java", "-jar", "/authentication-service.jar"]
 #
