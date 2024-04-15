@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway-proxy
+  config:
+    import: "optional:configserver:http://localhost:9002"
+  cloud:
+    gateway:
+      routes:
+        - id: user-management-route
+          uri: lb://user-management
+          predicates:
+            - Path=/management/**
+          filters:
+            - StripPrefix=1
+#
+        - id: authentication-service-route
+#          uri: http://localhost:8081
+#          use load balance + service name
+          uri: lb://authentication-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+    config:
+      name: gateway
+      discovery:
+        enabled: true
+        service-id: config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/

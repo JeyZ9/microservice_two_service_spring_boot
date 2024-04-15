@@ -1,0 +1,30 @@
+version: "1"
+networks:
+  web_network:
+    name: microservice_network
+    driver: bridge
+services:
+#  postgres-authent:
+#    image: postgres:latest
+#    container_name: postgres
+#    restart: always
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: postgres
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 257890
+#    networks:
+#      - web_network
+
+  authentication-service:
+    build: ./authentication-service/.
+    container_name: authentication-service
+#    depends_on:
+#      - postgres-authent
+    ports:
+      - "9091:8081"
+    restart: always
+    networks:
+      - web_network
+
